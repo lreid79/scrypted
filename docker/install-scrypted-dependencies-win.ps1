@@ -4,13 +4,13 @@ winget install -h "Python 3.10"
 py -m pip install --upgrade pip
 py -m pip install aiofiles debugpy typing_extensions typing opencv-python
 
-npx -y scrypted@latest install-server
+.\npx -y scrypted@latest install-server
 
 $USER_HOME_ESCAPED = $env:USERPROFILE.replace('\', '\\')
 $SCRYPTED_HOME = $env:USERPROFILE + '\.scrypted'
 $SCRYPTED_HOME_ESCAPED_PATH = $SCRYPTED_HOME.replace('\', '\\')
-npm install --global --production windows-build-tools
-npm install --prefix $SCRYPTED_HOME node-windows@1.0.0-beta.8 --save
+.\npm install --global --production windows-build-tools
+.\npm install --prefix $SCRYPTED_HOME node-windows@1.0.0-beta.8 --save
 
 $SERVICE_JS = @"
 const fs = require('fs');
@@ -67,7 +67,7 @@ svc.uninstall();
 $INSTALL_SERVICE_JS_PATH = $SCRYPTED_HOME + '\install-service.js'
 $INSTALL_SERVICE_JS | Out-File -Encoding ASCII -FilePath $INSTALL_SERVICE_JS_PATH
 
-node $INSTALL_SERVICE_JS_PATH
+.\node $INSTALL_SERVICE_JS_PATH
 
 Write-Output "Scrypted is now running at: https://localhost:10443/"
 Write-Output "Note that it is https and that you'll be asked to approve/ignore the website certificate."
